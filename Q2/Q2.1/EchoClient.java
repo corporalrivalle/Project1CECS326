@@ -8,7 +8,8 @@ import java.io.*;
 public class EchoClient
 {
 	public static void main(String[] args) {
-		try{
+		try
+		{
 			Socket sock = new Socket("localhost", 6018);
 			System.out.println("Connected to server!");
 
@@ -25,7 +26,8 @@ public class EchoClient
 			BufferedReader bin = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 			System.out.println(bin.readLine());
 
-		} catch (IOException ioe) {
+		} 
+		catch (IOException ioe) {
 			System.out.println("--- Server connection request failed. Please try again. (" + ioe + ") ---");
 		}
 	}
