@@ -37,7 +37,7 @@ public class  EchoServer
                 if (serverEcho.contains("client")){
                     clientEcho = "Hi! I am the server!";
                 } else {
-                    clientEcho = "Did not recieve expected result.";
+                    clientEcho = serverEcho;
                 }
     
                 // Display what the server has received
@@ -47,6 +47,8 @@ public class  EchoServer
                 System.out.println("Echoing information recieved back to client...");
                 PrintWriter pout = new PrintWriter(client.getOutputStream(), true);
                 pout.println("Server Echo: " + clientEcho);
+
+                System.out.println("Terminating Connection...");
             }
             catch (IOException ioe) {
                 System.err.println(ioe);
