@@ -31,6 +31,14 @@ public class  EchoServer
     
                 // save information as a string (serverEcho) so any information can be displayed (numbers conflict with string concatenation)
                 String serverEcho = bin.readLine();
+                String clientEcho ="";
+
+                //Changes output to correctly identify server/client. If no server/client info is given, an error message is returned instead.
+                if (serverEcho.contains("client")){
+                    clientEcho = "Hi! I am the server!";
+                } else {
+                    clientEcho = "Did not recieve expected result.";
+                }
     
                 // Display what the server has received
                 System.out.println("Client has entered '" + serverEcho + "'");
@@ -38,7 +46,7 @@ public class  EchoServer
                 // Echo back what the server received (echo back client input to client)
                 System.out.println("Echoing information recieved back to client...");
                 PrintWriter pout = new PrintWriter(client.getOutputStream(), true);
-                pout.println("Server Echo: " + serverEcho);
+                pout.println("Server Echo: " + clientEcho);
             }
             catch (IOException ioe) {
                 System.err.println(ioe);

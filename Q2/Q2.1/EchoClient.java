@@ -16,11 +16,11 @@ public class EchoClient
 			// Take the system.in data (user keyboard input)
 			BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
 
-			System.out.println("Enter an input to send to server: ");
+			System.out.println("Sending input to server: 'Hi! I am the client!'");
 
 			// Send user input to server
 			PrintWriter pout = new PrintWriter(sock.getOutputStream(), true);
-			pout.println(userInput.readLine());
+			pout.println("Hi! This is the client!");
 
 			// Retreive server echo
 			BufferedReader bin = new BufferedReader(new InputStreamReader(sock.getInputStream()));
