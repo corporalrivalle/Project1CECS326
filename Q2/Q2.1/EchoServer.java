@@ -1,6 +1,6 @@
-/**
- * An echo server listening on port 6007. This server reads from the client
- * and echoes back the result. 
+/*
+ * An echo server listening on port 6017. 
+ * This server reads information sent by the client and echoes it back. 
  */
 
 import java.net.*;
@@ -10,12 +10,15 @@ public class  EchoServer
 {
     public static void main(String[] args) 
     {
+        try
+        {
             System.out.println("Server Started!");
-            try
+            // Declare server socket on port 6017
+            ServerSocket sock = new ServerSocket(6017);
+
+            // while loop to keep server running
+            while (true)
             {
-                // Declare server socket on port 6017
-                ServerSocket sock = new ServerSocket(6018);
-    
                 // Wait for the clien to connect to the server
                 System.out.println("Waiting for client...");
                 Socket client = sock.accept();
@@ -31,14 +34,6 @@ public class  EchoServer
     
                 // save information as a string (serverEcho) so any information can be displayed (numbers conflict with string concatenation)
                 String serverEcho = bin.readLine();
-                String clientEcho ="";
-
-                //Changes output to correctly identify server/client. If no server/client info is given, an error message is returned instead.
-                if (serverEcho.contains("client")){
-                    clientEcho = "Hi! I am the server!";
-                } else {
-                    clientEcho = "Did not recieve expected result.";
-                }
     
                 // Display what the server has received
                 System.out.println("Client has entered '" + serverEcho + "'");
@@ -46,10 +41,18 @@ public class  EchoServer
                 // Echo back what the server received (echo back client input to client)
                 System.out.println("Echoing information recieved back to client...");
                 PrintWriter pout = new PrintWriter(client.getOutputStream(), true);
-                pout.println("Server Echo: " + clientEcho);
-            }
-            catch (IOException ioe) {
-                System.err.println(ioe);
+                pout.println("Server Echo: " + serverEcho);
+
+                    
+                // close client connection
+                System.out.println("Closing client connection and allowing for new one... \n");
+                client.close();
             }
         }
+
+        catch (IOException ioe) 
+        {
+            System.err.println(ioe);
+        }
     }
+}
